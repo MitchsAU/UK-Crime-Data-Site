@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crime Data Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="map" style="height: 800px;"></div>
@@ -45,8 +46,12 @@
         <option value="2023-04">April 2023</option>
         <option value="2023-05">May 2023</option>
         <option value="2023-06">June 2023</option>
-
     </select>
+
+    <div id="contentbox">
+    <div id="content"></div>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="map.js"></script>
 </body>

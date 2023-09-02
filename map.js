@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let marker = L.marker([52.6376, -1.135171], { icon: redIcon, draggable: false }).addTo(map);
-
+    const popupContentBox = document.getElementById('content');
 
     map.on('click', event => {
         const latitude = event.latlng.lat;
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const category = item.category;
                     const outcome = item.outcome_status ? item.outcome_status.category : 'Outcome not available';
                     const street = item.location.street.name || 'Unknown Street';
+                    const outcomeDate = item.outcome_status ? item.outcome_status.date : 'Resolution Date Unknown';
                     console.log(item);
 
                     // Combine marker information if lat and lng match
@@ -53,12 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (combinedMarkers[combinedKey]) {
                         combinedMarkers[combinedKey].category.push(category);
                         combinedMarkers[combinedKey].outcome.push(outcome);
+                        combinedMarkers[combinedKey].outcomeDate.push(outcomeDate);
                     } else {
                         combinedMarkers[combinedKey] = {
                             lat,
                             lng,
                             category: [category],
                             outcome: [outcome],
+                            outcomeDate: [outcomeDate],
                             street
                         };
                     }
@@ -66,19 +69,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Create markers for combined data
                 Object.values(combinedMarkers).forEach(markerData => {
-                    const { lat, lng, category, outcome, street } = markerData;
+                    const { lat, lng, category, outcome, outcomeDate, street } = markerData;
                 
-                    // Create a formatted popup content
-                    let popupContent = `Street: ${street}<hr>`; // Add a horizontal line below street info
-                
-                    // Loop through each category and outcome and add them to the popup with dividers
-                    for (let i = 0; i < category.length; i++) {
-                        // Check if there are categories and outcomes for the current index
-                        const categoryText = category[i] ? `Category: ${category[i]}<br>` : '';
-                        const outcomeText = outcome[i] ? `Outcome: ${outcome[i]}<br>` : '';
-                
-                        popupContent += `${categoryText}${outcomeText}<hr>`; // Add a horizontal line between category-outcome pairs
-                    }
+               // Define a color mapping for each category
+               const categoryColors = {
+                'violent-crime': 'red', 
+                'criminal-damage-arson': 'red',  
+                'possession-of-weapons': 'red',  
+                'burglary': '#ffbf00',      
+                'drugs': '#ffbf00',
+                'other-theft': '#ffbf00', 
+                'public-order': '#ffbf00',  
+                'robbery': '#ffbf00',  
+                'theft-from-the-person': '#ffbf00', 
+                'vehicle-crime': '#ffbf00',
+                'bicycle-theft': 'green',  
+                'anti-social-behaviour': 'green',
+                'shoplifting': 'green',             
+                'other-crime': 'green',
+            };
+
+            // Create a formatted popup content with colored dots
+            let popupContent = `Street: ${street}<hr>`;
+            let Content = `Street: ${street}<hr>`;
+
+            // Loop through each category and outcome and add them to the popup with dividers
+            for (let i = 0; i < category.length; i++) {
+                const categoryText = category[i] || 'Unknown Category';
+                const outcomeText = outcome[i] || 'Outcome not available';
+                const outcomeDateText = outcomeDate[i] || 'Resolution Date Unknown';
+
+                // Get the color based on the category
+                const categoryColor = categoryColors[categoryText] || 'gray'; // Default to gray if no matching color
+
+                // Create a colored dot using a <span> element with inline CSS
+                const coloredDot = `<span style="display: inline-block; width: 6px; height: 6px; background-color: ${categoryColor}; border-radius: 50%; margin-right: 5px;"></span>`;
+
+                popupContent += `${coloredDot}Category: ${categoryText}<br>Outcome: ${outcomeText}<br>Outcome Date: ${outcomeDateText}<hr>`;
+                Content += `Category: ${categoryText}<br>Outcome: ${outcomeText}<br>Outcome Date: ${outcomeDateText}<hr>`;
+            }
+            popupContentBox.innerHTML = Content;
                     
                     L.marker([lat, lng])
                         .addTo(map)
@@ -87,4 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
     });
+
+    
 });

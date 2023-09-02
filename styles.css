@@ -1,0 +1,16 @@
+
+*{
+margin: 0;
+padding: 0;
+}
+#contentbox{
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+width: 100%;
+    
+}
+#content{
+text-align: left;
+width: 20em;
+
+}
