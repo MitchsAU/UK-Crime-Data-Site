@@ -6,47 +6,64 @@
     <title>Crime Data Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
 </head>
 <body>
+    <div class="container">
+    <main>
+        <div class="header">
+            <h1>Crime Tracker UK</h1>
+            <h4>- England, Wales & Northern Ireland -</h2>
+        </div>
+
+        <input type="text" id="locationSearch" placeholder="Enter town or city">
+        <button id="searchButton">Search</button>
+            <select id="dateSelect">
+            <option value="2020-07">July 2020</option>
+            <option value="2020-08">August 2020</option>
+            <option value="2020-09">September 2020</option>
+            <option value="2020-10">October 2020</option>
+            <option value="2020-11">November 2020</option>
+            <option value="2020-12">December 2020</option>
+            <option value="2021-01">January 2021</option>
+            <option value="2021-02">February 2021</option>
+            <option value="2021-03">March 2021</option>
+            <option value="2021-04">April 2021</option>
+            <option value="2021-05">May 2021</option>
+            <option value="2021-06">June 2021</option>
+            <option value="2021-07">July 2021</option>
+            <option value="2021-08">August 2021</option>
+            <option value="2021-09">September 2021</option>
+            <option value="2021-10">October 2021</option>
+            <option value="2021-11">November 2021</option>
+            <option value="2021-12">December 2021</option>
+            <option value="2022-01">January 2022</option>
+            <option value="2022-02">February 2022</option>
+            <option value="2022-03">March 2022</option>
+            <option value="2022-04">April 2022</option>
+            <option value="2022-05">May 2022</option>
+            <option value="2022-06">June 2022</option>
+            <option value="2022-07">July 2022</option>
+            <option value="2022-08">August 2022</option>
+            <option value="2022-09">September 2022</option>
+            <option value="2022-10">October 2022</option>
+            <option value="2022-11">November 2022</option>
+            <option value="2022-12">December 2022</option>
+            <option value="2023-01">January 2023</option>
+            <option value="2023-02">February 2023</option>
+            <option value="2023-03">March 2023</option>
+            <option value="2023-04">April 2023</option>
+            <option value="2023-05">May 2023</option>
+            <option value="2023-06">June 2023</option>
+        </select>
+        <button id="fullScreenButton">Fullscreen Map</button>
+
+    </main>
     <div id="map"></div>
-    <select id="dateSelect">
-        <option value="2020-07">July 2020</option>
-        <option value="2020-08">August 2020</option>
-        <option value="2020-09">September 2020</option>
-        <option value="2020-10">October 2020</option>
-        <option value="2020-11">November 2020</option>
-        <option value="2020-12">December 2020</option>
-        <option value="2021-01">January 2021</option>
-        <option value="2021-02">February 2021</option>
-        <option value="2021-03">March 2021</option>
-        <option value="2021-04">April 2021</option>
-        <option value="2021-05">May 2021</option>
-        <option value="2021-06">June 2021</option>
-        <option value="2021-07">July 2021</option>
-        <option value="2021-08">August 2021</option>
-        <option value="2021-09">September 2021</option>
-        <option value="2021-10">October 2021</option>
-        <option value="2021-11">November 2021</option>
-        <option value="2021-12">December 2021</option>
-        <option value="2022-01">January 2022</option>
-        <option value="2022-02">February 2022</option>
-        <option value="2022-03">March 2022</option>
-        <option value="2022-04">April 2022</option>
-        <option value="2022-05">May 2022</option>
-        <option value="2022-06">June 2022</option>
-        <option value="2022-07">July 2022</option>
-        <option value="2022-08">August 2022</option>
-        <option value="2022-09">September 2022</option>
-        <option value="2022-10">October 2022</option>
-        <option value="2022-11">November 2022</option>
-        <option value="2022-12">December 2022</option>
-        <option value="2023-01">January 2023</option>
-        <option value="2023-02">February 2023</option>
-        <option value="2023-03">March 2023</option>
-        <option value="2023-04">April 2023</option>
-        <option value="2023-05">May 2023</option>
-        <option value="2023-06">June 2023</option>
-    </select>
+    
+    </div>
+   
 
     <div id="contentbox">
     <div id="content"></div>

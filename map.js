@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const combinedMarkers = {};
 
-                data.slice(0, 255).forEach(item => { // This makes it so there is no more than 255 crimes shown on the screen at the same time. Reducing overload of information.
+                data.slice(0, 50).forEach(item => { // This makes it so there is no more than 50 crimes shown on the screen at the same time. Reducing overload of information.
                     const lat = item.location.latitude;
                     const lng = item.location.longitude;
                     const category = item.category;
@@ -117,6 +117,70 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
     });
+    const locationSearchInput = document.getElementById('locationSearch');
+    const searchButton = document.getElementById('searchButton');
+    const nominatimEndpoint = 'https://nominatim.openstreetmap.org/search';
+    
+    // Function to handle the search
+    function performSearch() {
+        const locationName = locationSearchInput.value;
+    
+        // Perform a geocoding request
+        fetch(`${nominatimEndpoint}?q=${encodeURIComponent(locationName)}&format=json`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    // Get the first result's coordinates
+                    const latitude = parseFloat(data[0].lat);
+                    const longitude = parseFloat(data[0].lon);
+    
+                    // Center the map on the found location
+                    map.setView([latitude, longitude], 12);
+                } else {
+                    alert('Location not found.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching location data:', error);
+                alert('Error fetching location data. Please try again later.');
+            });
+    }
+    
+    // Listen for the click event on the search button
+    searchButton.addEventListener('click', performSearch);
+    
+    // Listen for the Enter key press event in the input field
+    locationSearchInput.addEventListener('keyup', event => {
+        if (event.key === 'Enter') {
+            performSearch();
+        }
+    });
 
+    // Get a reference to the map element
+const mapElement = document.getElementById("map");
+
+// Get a reference to the full-screen button
+const fullScreenButton = document.getElementById("fullScreenButton");
+
+// Function to toggle full-screen mode
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        // If the document is not in full-screen mode, enter full-screen
+        if (mapElement.requestFullscreen) {
+            mapElement.requestFullscreen();
+        }
+    } else {
+        // If the document is in full-screen mode, exit full-screen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+// Add a click event listener to the full-screen button
+fullScreenButton.addEventListener("click", toggleFullScreen);
+
+    
+    
     
 });
