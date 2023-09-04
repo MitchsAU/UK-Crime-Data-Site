@@ -14,3 +14,7 @@ text-align: left;
 width: 20em;
 
 }
+
+#map{
+    height: 100vh;
+}

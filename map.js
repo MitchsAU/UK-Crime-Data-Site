@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const categoryColor = categoryColors[categoryText] || 'gray'; // Default to gray if no matching color
 
                 // Create a colored dot using a <span> element with inline CSS
-                const coloredDot = `<span style="display: inline-block; width: 6px; height: 6px; background-color: ${categoryColor}; border-radius: 50%; margin-right: 5px;"></span>`;
+                const coloredDot = `<span style="display: inline-block; width: 9px; height: 9px; background-color: ${categoryColor}; border-radius: 50%; margin-right: 5px;"></span>`;
 
                 popupContent += `${coloredDot}Category: ${categoryText}<br>Outcome: ${outcomeText}<br>Outcome Date: ${outcomeDateText}<hr>`;
                 Content += `Category: ${categoryText}<br>Outcome: ${outcomeText}<br>Outcome Date: ${outcomeDateText}<hr>`;
