@@ -79,3 +79,7 @@ main {
     color: white;
     cursor: pointer;
 }
+
+h4{
+    font-weight: 100;
+}
