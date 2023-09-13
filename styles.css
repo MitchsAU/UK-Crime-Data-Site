@@ -5,8 +5,8 @@ padding: 0;
 font-family: 'Roboto';
 }
 
-body{
-    /* background-image: url(london.jpg); */
+.container{
+    background-image: url(2.png);
 }
 #contentbox{
 display: grid;
@@ -42,6 +42,7 @@ main {
 
 .header {
     margin-bottom: 10vh;
+    color: white;
 }
 
 /* Position the map on the right */
@@ -54,7 +55,7 @@ main {
     height: 90vh;
     margin: 0 2vw 0 50vw;
     border-radius: 30px;
-    border: 2px solid black;
+    border: 2px solid white;
     font-size: 15px;
 }
 

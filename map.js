@@ -1,9 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('map').setView([52.6376, -1.135171], 12); // Initial map view
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    var Regular = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    
+    var GoogleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0','mt1','mt2','mt3']
+    });
+    var GoogleStreet = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0','mt1','mt2','mt3']
+    });
+    var Dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+    });
+    var Topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+
+// Map Layer Selector
+
+var baseMaps = {
+    "Regular": Regular,
+    "Google Satelite": GoogleSat,
+    "GoogleStreet": GoogleStreet,
+    "Dark": Dark,
+    "Topographic": Topo,
+
+};
+
+L.control.layers(baseMaps).addTo(map);
 
     let redIcon = L.icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
@@ -48,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const street = item.location.street.name || 'Unknown Street';
                     const outcomeDate = item.outcome_status ? item.outcome_status.date : 'Resolution Date Unknown';
                     console.log(item);
-
+        
                     // Combine marker information if lat and lng match
                     const combinedKey = `${lat},${lng}`;
                     if (combinedMarkers[combinedKey]) {
@@ -117,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
     });
+    
     const locationSearchInput = document.getElementById('locationSearch');
     const searchButton = document.getElementById('searchButton');
     const nominatimEndpoint = 'https://nominatim.openstreetmap.org/search';
@@ -181,6 +214,5 @@ function toggleFullScreen() {
 fullScreenButton.addEventListener("click", toggleFullScreen);
 
     
-    
-    
+   
 });

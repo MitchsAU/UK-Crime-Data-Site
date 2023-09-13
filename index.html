@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crime Data Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="stylesheet" href="styles.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
@@ -20,7 +20,6 @@
         <input type="text" id="locationSearch" placeholder="Enter town or city">
         <button id="searchButton">Search</button>
             <select id="dateSelect">
-            <option value="2020-07">July 2020</option>
             <option value="2020-08">August 2020</option>
             <option value="2020-09">September 2020</option>
             <option value="2020-10">October 2020</option>
@@ -56,6 +55,7 @@
             <option value="2023-04">April 2023</option>
             <option value="2023-05">May 2023</option>
             <option value="2023-06">June 2023</option>
+            <option value="2023-08">August 2023 (Coming Soon)</option>
         </select>
         <button id="fullScreenButton">Fullscreen Map</button>
 
@@ -69,7 +69,7 @@
     <div id="content"></div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="map.js"></script>
 </body>
 </html>
