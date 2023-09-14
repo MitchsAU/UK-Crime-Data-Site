@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crime Data Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./CSS/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
 </head>
@@ -58,19 +58,18 @@
             <option value="2023-08">August 2023 (Coming Soon)</option>
         </select>
         <button id="fullScreenButton">Fullscreen Map</button>
-
+        <a href="heatmap.html"><button id="toggleHeatMapButton">Heat Map</button></a>
     </main>
     <div id="map"></div>
     
     </div>
-   
-
     <div id="contentbox">
     <div id="content"></div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    <script src="map.js"></script>
+    <script src="./JS/map.js"></script>
+    <script src="./JS/fullscreen.js"></script>
 </body>
 </html>
 

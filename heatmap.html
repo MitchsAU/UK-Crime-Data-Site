@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Leaflet Heatmap Cell</title>
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="./JS/heatmap.min.js"></script>
+    <script src="./JS/leaflet-heatmap.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="stylesheet" href="./CSS/styles.css"> 
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div class="header">
+                <h1>Crime Tracker UK</h1>
+                <h4>- England, Wales & Northern Ireland -</h2>
+            </div>
+    
+            <input type="text" id="locationSearch" placeholder="Enter town or city">
+            <button id="searchButton">Search</button>
+                <select id="dateSelect">
+                <option value="2020-08">August 2020</option>
+                <option value="2020-09">September 2020</option>
+                <option value="2020-10">October 2020</option>
+                <option value="2020-11">November 2020</option>
+                <option value="2020-12">December 2020</option>
+                <option value="2021-01">January 2021</option>
+                <option value="2021-02">February 2021</option>
+                <option value="2021-03">March 2021</option>
+                <option value="2021-04">April 2021</option>
+                <option value="2021-05">May 2021</option>
+                <option value="2021-06">June 2021</option>
+                <option value="2021-07">July 2021</option>
+                <option value="2021-08">August 2021</option>
+                <option value="2021-09">September 2021</option>
+                <option value="2021-10">October 2021</option>
+                <option value="2021-11">November 2021</option>
+                <option value="2021-12">December 2021</option>
+                <option value="2022-01">January 2022</option>
+                <option value="2022-02">February 2022</option>
+                <option value="2022-03">March 2022</option>
+                <option value="2022-04">April 2022</option>
+                <option value="2022-05">May 2022</option>
+                <option value="2022-06">June 2022</option>
+                <option value="2022-07">July 2022</option>
+                <option value="2022-08">August 2022</option>
+                <option value="2022-09">September 2022</option>
+                <option value="2022-10">October 2022</option>
+                <option value="2022-11">November 2022</option>
+                <option value="2022-12">December 2022</option>
+                <option value="2023-01">January 2023</option>
+                <option value="2023-02">February 2023</option>
+                <option value="2023-03">March 2023</option>
+                <option value="2023-04">April 2023</option>
+                <option value="2023-05">May 2023</option>
+                <option value="2023-06">June 2023</option>
+                <option value="2023-08">August 2023 (Coming Soon)</option>
+            </select>
+            <button id="fullScreenButton">Fullscreen Map</button>
+            <a href="index.html"><button id="toggleHeatMapButton">Pin Location Map</button></a>
+        </main>
+        <div id="map"></div>
+        </div>
+       
+        <div id="contentbox">
+        <div id="content"></div>
+        </div>
+<script src="./JS/heatmap.js"></script>
+<script src="./JS/fullscreen.js"></script>
+</body>
+</html>

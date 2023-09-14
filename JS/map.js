@@ -22,10 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var Topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 	maxZoom: 17,
 	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-});
+    });
 
 // Map Layer Selector
-
 var baseMaps = {
     "Regular": Regular,
     "Google Satelite": GoogleSat,
@@ -34,7 +33,7 @@ var baseMaps = {
     "Topographic": Topo,
 
 };
-
+//Controller for changing the map varients
 L.control.layers(baseMaps).addTo(map);
 
     let redIcon = L.icon({
@@ -187,32 +186,5 @@ L.control.layers(baseMaps).addTo(map);
         if (event.key === 'Enter') {
             performSearch();
         }
-    });
-
-    // Get a reference to the map element
-const mapElement = document.getElementById("map");
-
-// Get a reference to the full-screen button
-const fullScreenButton = document.getElementById("fullScreenButton");
-
-// Function to toggle full-screen mode
-function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-        // If the document is not in full-screen mode, enter full-screen
-        if (mapElement.requestFullscreen) {
-            mapElement.requestFullscreen();
-        }
-    } else {
-        // If the document is in full-screen mode, exit full-screen
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
-    }
-}
-
-// Add a click event listener to the full-screen button
-fullScreenButton.addEventListener("click", toggleFullScreen);
-
-    
-   
+    }); 
 });
