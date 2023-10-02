@@ -2,7 +2,7 @@
 const mapElement = document.getElementById("map");
 
 // Get a reference to the full-screen button
-const fullScreenButton = document.getElementById("fullScreenButton");
+const fullScreenButton = document.getElementById("fullScreen");
 
 // Function to toggle full-screen mode
 function toggleFullScreen() {

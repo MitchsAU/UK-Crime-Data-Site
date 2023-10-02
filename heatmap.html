@@ -11,6 +11,9 @@
     <script src="./JS/heatmap.min.js"></script>
     <script src="./JS/leaflet-heatmap.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="./CSS/styles.css"> 
 </head>
 <body>
@@ -20,10 +23,22 @@
                 <h1>Crime Tracker UK</h1>
                 <h4>- England, Wales & Northern Ireland -</h2>
             </div>
-    
-            <input type="text" id="locationSearch" placeholder="Enter town or city">
-            <button id="searchButton">Search</button>
-                <select id="dateSelect">
+            <div class="subtitle">
+                <h5>Heat Map</h5>
+            </div>
+            <hr class="solid">
+        <div id="selectors">
+            <div class="section1">
+            <div class="searchStyle">
+                <div>
+                    <input id="locationSearching" class="blinking-button outline light hover blink" placeholder="town or city"></input>
+                </div>
+                <div>
+                    <button class="blinking-button solid light hover blink">
+                    <span id="searchingButton" class="material-symbols-outlined">search</span>
+                </div>
+            </div>
+            <select id="dateSelect" class="blinking-button outline light hover blink">
                 <option value="2020-08">August 2020</option>
                 <option value="2020-09">September 2020</option>
                 <option value="2020-10">October 2020</option>
@@ -61,15 +76,53 @@
                 <option value="2023-06">June 2023</option>
                 <option value="2023-08">August 2023 (Coming Soon)</option>
             </select>
-            <button id="fullScreenButton">Fullscreen Map</button>
-            <a href="index.html"><button id="toggleHeatMapButton">Pin Location Map</button></a>
+            <div>
+                <select id="crimeSelect" class="blinking-button outline light hover blink">
+                    <option value="all-crime">All Crime</option>
+                    <option value="anti-social-behaviour">Anti-social behaviour</option>
+                    <option value="bicycle-theft">Bicycle theft</option>
+                    <option value="burglary">Burglary</option>
+                    <option value="criminal-damage-arson">Criminal damage and arson</option>
+                    <option value="drugs">Drugs</option>
+                    <option value="other-theft">Other theft</option>
+                    <option value="possession-of-weapons">Possession of weapons</option>
+                    <option value="public-order">Public order</option>
+                    <option value="robbery">Robbery</option>
+                    <option value="shoplifting">Shoplifting</option>
+                    <option value="theft-from-the-person">Theft from the person</option>
+                    <option value="vehicle-crime">Vehicle crime</option>
+                    <option value="violent-crime">Violence and sexual offences</option>
+                    <option value="other-crime">Other crime</option>
+                </select>
+            </div>
+            <div>
+                <a href="index.html" class="blinking-button solid light hover icon blink" id="wide">
+                  <span class="label">Pin Location Map</span>
+                  <span class="material-icons icon">chevron_right</span>
+                </a>
+              </div>
+
+            <div>
+                <button type="button" id="fullScreen" class="blinking-button solid light hover icon blink">
+                  <span class="label">Fullscreen map</span>
+                  <span class="material-icons icon">chevron_right</span>
+                </button>
+            </div>
+        </div>
+        <div class="section2">
+            <div class="crimeDisplay">
+                <span>Statistics</span>
+                 <table id="crimeCounts"></table> <!-- I use the table tag so i can display text in alternating colours through the tr:nth-child(odd/even) css  -->
+            </div>
+        </div>
+        </div>
         </main>
         <div id="map"></div>
         </div>
        
         <div id="contentbox">
         <div id="content"></div>
-        </div>
+    </div>
 <script src="./JS/heatmap.js"></script>
 <script src="./JS/fullscreen.js"></script>
 </body>

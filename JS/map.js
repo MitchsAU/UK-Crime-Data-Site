@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('map').setView([52.6376, -1.135171], 12); // Initial map view
+    
+    var SmoothDark = L.tileLayer('https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+        attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        minZoom: 0,
+        maxZoom: 22,
+        subdomains: 'abcd',
+        accessToken: 'KgfFC5uxE6cz1H9hylERXAnkGXI5SBBYJzu3S0rrY9hyHZHY4XWUNNSJ2U6ILDtw'
+    });
 
     var Regular = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -28,9 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 var baseMaps = {
     "Regular": Regular,
     "Google Satelite": GoogleSat,
-    "GoogleStreet": GoogleStreet,
+    "Google Street": GoogleStreet,
     "Dark": Dark,
     "Topographic": Topo,
+    "Smooth Dark": SmoothDark,
 
 };
 //Controller for changing the map varients
@@ -121,8 +130,8 @@ L.control.layers(baseMaps).addTo(map);
             };
 
             // Create a formatted popup content with colored dots
-            let popupContent = `Street: ${street}<hr>`;
-            let Content = `Street: ${street}<hr>`;
+            let popupContent = `<span class="tableHeader">Location: ${street}</span>`;
+            popupContent += `<div class="table"><div class="popupDiv"><span>Category</span><span>Outcome</span><span>Outcome Date</span></div>`;
 
             // Loop through each category and outcome and add them to the popup with dividers
             for (let i = 0; i < category.length; i++) {
@@ -136,10 +145,9 @@ L.control.layers(baseMaps).addTo(map);
                 // Create a colored dot using a <span> element with inline CSS
                 const coloredDot = `<span style="display: inline-block; width: 9px; height: 9px; background-color: ${categoryColor}; border-radius: 50%; margin-right: 5px;"></span>`;
 
-                popupContent += `${coloredDot}Category: ${categoryText}<br>Outcome: ${outcomeText}<br>Outcome Date: ${outcomeDateText}<hr>`;
-                Content += `Category: ${categoryText}<br>Outcome: ${outcomeText}<br>Outcome Date: ${outcomeDateText}<hr>`;
+                popupContent += `<div class="popupContentDiv"><span><span>${coloredDot}</span> ${categoryText}</span><span> ${outcomeText}</span><span> ${outcomeDateText}</span></div>`;
+                // popupContent += `${coloredDot}Category: ${categoryText}<br>Outcome: ${outcomeText}<br>Outcome Date: ${outcomeDateText}<hr>`;
             }
-            popupContentBox.innerHTML = Content;
                     
                     L.marker([lat, lng])
                         .addTo(map)
@@ -149,8 +157,8 @@ L.control.layers(baseMaps).addTo(map);
             });
     });
     
-    const locationSearchInput = document.getElementById('locationSearch');
-    const searchButton = document.getElementById('searchButton');
+    const locationSearchInput = document.getElementById('locationSearching');
+    const searchButton = document.getElementById('searchingButton');
     const nominatimEndpoint = 'https://nominatim.openstreetmap.org/search';
     
     // Function to handle the search

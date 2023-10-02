@@ -1,5 +1,13 @@
     document.addEventListener('DOMContentLoaded', () => {
         const map = L.map('map').setView([52.6376, -1.135171], 12); // Initial map view
+
+        var SmoothDark = L.tileLayer('https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
+            attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            minZoom: 0,
+            maxZoom: 22,
+            subdomains: 'abcd',
+            accessToken: 'KgfFC5uxE6cz1H9hylERXAnkGXI5SBBYJzu3S0rrY9hyHZHY4XWUNNSJ2U6ILDtw'
+        });
     
         var Regular = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -31,6 +39,7 @@
         "GoogleStreet": GoogleStreet,
         "Dark": Dark,
         "Topographic": Topo,
+        "SmoothDark": SmoothDark,
     
     };
     //Controller for changing the map varients
@@ -54,7 +63,10 @@
     map.on('click', function (e) {
         // Remove previous markers
         removeMarkers();
-    
+
+        crimeCounts = {}; // Clear crime counts
+        displayCrimeCounts(crimeCounts); // Clear displayed counts
+
         // Add the clicked coordinates to the array
         clickedCoordinates.push({
             lat: e.latlng.lat,
@@ -68,11 +80,11 @@
     
         // If three points have been clicked, fetch data and update heatmap
         if (clickedCoordinates.length === 3) {
-            // Fetch and display crime data for new marker position and selected date
+            // Fetch and display crime data for new marker position with selected date and selected crime
             const selectedDate = dateSelect.value;
+            const selectedCrime = crimeSelect.value;
             // Construct the API URL with clicked coordinates
-            const apiUrl = `https://data.police.uk/api/crimes-street/all-crime?poly=${clickedCoordinates[0].lat},${clickedCoordinates[0].lng}:${clickedCoordinates[1].lat},${clickedCoordinates[1].lng}:${clickedCoordinates[2].lat},${clickedCoordinates[2].lng}&date=${selectedDate}`;
-    
+            const apiUrl = `https://data.police.uk/api/crimes-street/${selectedCrime}?poly=${clickedCoordinates[0].lat},${clickedCoordinates[0].lng}:${clickedCoordinates[1].lat},${clickedCoordinates[1].lng}:${clickedCoordinates[2].lat},${clickedCoordinates[2].lng}&date=${selectedDate}`;
             // Fetch data and update heatmap
             fetch(apiUrl)
                 .then(resp => {
@@ -92,13 +104,23 @@
                     return resp.json();
                 })
                 .then(data => {
-                    const heatData = data.slice(0, 9999).map(item => ({
-                        lat: item.location.latitude,
-                        lng: item.location.longitude,
-                        count: 1
-                        
-                    }));
-                    
+
+                    Object.keys(crimeCounts).forEach(category => {
+                        crimeCounts[category] = 0;
+                    });
+
+                    const heatData = data.slice(0, 9999).map(item => {
+                        console.log(item.category);
+                        crimeCounts[item.category] = (crimeCounts[item.category] || 0) + 1;
+                        return {
+                            lat: item.location.latitude,
+                            lng: item.location.longitude,
+                            count: 1
+                        };
+                    });
+
+                    displayCrimeCounts(crimeCounts);
+
                     var cfg = {
                         "radius": 20,
                         "maxOpacity": 0.8,
@@ -127,15 +149,15 @@
                 }); 
         }
         });
-        const locationSearchInput = document.getElementById('locationSearch');
-        const searchButton = document.getElementById('searchButton');
+        const locationSearchInput = document.getElementById('locationSearching');
+        const searchButton = document.getElementById('searchingButton');
         const nominatimEndpoint = 'https://nominatim.openstreetmap.org/search';
         
         // Function to handle the search
         function performSearch() {
             const locationName = locationSearchInput.value;
         
-            // Perform a geocoding request
+            // Perform a geocoding request through another API
             fetch(`${nominatimEndpoint}?q=${encodeURIComponent(locationName)}&format=json`)
                 .then(response => response.json())
                 .then(data => {
@@ -165,4 +187,51 @@
                 performSearch();
             }
         });
+
+        function displayCrimeCounts(counts) {
+            const countsContainer = document.getElementById('crimeCounts');
+            countsContainer.innerHTML = ''; // Clear previous counts
+    
+            // Iterate through the crime counts and add them to the container
+            for (const category in counts) {
+                if (counts.hasOwnProperty(category)) {
+                    const count = counts[category];
+                    const countElement = document.createElement('tr');
+                    countElement.textContent = ` ${category}: ${count} `;
+                    countsContainer.appendChild(countElement);
+                }
+            }
+        }
+
+        var crimeCountsElement = document.getElementById('crimeCounts');
+
+        // Function to change the border colour
+        function setBorderColor(color) {
+        crimeCountsElement.style.borderColor = color;
+        }
+
+        // Added a MutationObserver to watch for changes in the content
+        var observer = new MutationObserver(function(mutations) {
+        // Checking if any text is added or removed
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+            // If the text is added it changes to border colour to be visible
+            if (crimeCountsElement.textContent.trim() !== '') {
+                setBorderColor('#c1c1c1');
+            } else {
+                // Setting it back to transprent if the text is removed
+                setBorderColor('transparent');
+            }
+            }
+        });
+        });
+
+        // this watches for changes in the child elements
+        var config = { childList: true, subtree: true };
+
+        // observes the element for any changes
+        observer.observe(crimeCountsElement, config);
+
     });
+
+    
