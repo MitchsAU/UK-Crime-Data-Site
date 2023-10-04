@@ -1,5 +1,5 @@
-#11841 Project 2: Web App Development
-##Mitchell Skelton
+# 11841 Project 2: Web App Development
+## Mitchell Skelton
 
-###Rationale
+### Rationale
 
