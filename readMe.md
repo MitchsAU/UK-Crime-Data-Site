@@ -24,8 +24,8 @@ I wanted to be able to click a button to adjust the URL from one to the other wi
 wouldn’t work in an external file being referenced in another with a script tag referencing it. If I could’ve improved further on this web app I would have added a feature where a chart is generated on the data provided as a modal popup for the user to click on as well as better optimising the code.
 
 # References
-[Stackoverflow](https://stackoverflow.com/) was partically used to help the integration of leaflt.
+[Stackoverflow](https://stackoverflow.com/) was partically used to help the integration of leaflet.
 
-[ChatGPT](https://chat.openai.com/) was used do help debug certain issues that i couldn't find on the internet.
+[ChatGPT](https://chat.openai.com/) was used to help debug certain issues that I couldn't find on the internet.
 
 [w3schools](https://www.w3schools.com/) was used to learn about new elements encounted when coding.
