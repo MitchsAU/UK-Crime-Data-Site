@@ -109,6 +109,15 @@
                     return resp.json(); // return json format
                 })
                 .then(data => {
+                    // Checking if there is no data, if so displays a alert telling the user
+                    if (data.length === 0) {
+                        // no data alert
+                        alert("No data found in-between these locations, make sure you are within the UK");
+                        // clearing the markers so the user can input new markers. If this isnt cleared here it breaks the code and the page has to be reloaded to function again.
+                        clickedCoordinates = [];
+                        removeMarkers();
+                        return;
+                    }
                     Object.keys(crimeCounts).forEach(category => {
                         crimeCounts[category] = 0;
                     });
