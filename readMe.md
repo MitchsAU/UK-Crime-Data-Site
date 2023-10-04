@@ -22,3 +22,8 @@ https://data.police.uk/api/crimes-at-location?date=${selectedDate}&lat=${latitud
 I wanted to be able to click a button to adjust the URL from one to the other without having to make a whole other page. Unfortunately, I couldn’t manage to figure this out as it proved to be too difficult and not worthwhile, leaving me to duplicate the map javascript file and transform it into the heatmap file. I definitely could’ve created some more functions like the full screen function to reduce the duplicated code but some proved to be harder than anticipated. The 
 ```performSearch()``` function
 wouldn’t work in an external file being referenced in another with a script tag referencing it. If I could’ve improved further on this web app I would have added a feature where a chart is generated on the data provided as a modal popup for the user to click on as well as better optimising the code.
+
+# References
+[Stackoverflow](https://stackoverflow.com/) was partically used to help the integration of leaflt.
+[ChatGPT](https://chat.openai.com/) was used do help debug certain issues that i couldn't find on the internet.
+[w3schools](https://www.w3schools.com/) was used to learn about new elements encounted when coding.
