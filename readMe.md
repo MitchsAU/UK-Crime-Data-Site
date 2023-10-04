@@ -25,5 +25,7 @@ wouldn’t work in an external file being referenced in another with a script ta
 
 # References
 [Stackoverflow](https://stackoverflow.com/) was partically used to help the integration of leaflt.
+
 [ChatGPT](https://chat.openai.com/) was used do help debug certain issues that i couldn't find on the internet.
+
 [w3schools](https://www.w3schools.com/) was used to learn about new elements encounted when coding.
