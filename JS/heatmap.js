@@ -163,7 +163,7 @@
             const locationName = locationSearchInput.value;
         
             // Perform a geocoding request through another API
-            fetch(`${nominatimEndpoint}?q=${encodeURIComponent(locationName)}&format=json`) //This is API (2/2), this API helps me geolocate the town or city the user inputs in the search box
+            fetch(`${nominatimEndpoint}?q=${encodeURIComponent(locationName)}&format=json`) //This is API (2/2), this nominatim API helps me geolocate the town or city the user inputs in the search box
                 .then(response => response.json())
                 .then(data => {
                     if (data.length > 0) {

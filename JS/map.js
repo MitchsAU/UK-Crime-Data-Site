@@ -87,6 +87,14 @@ L.control.layers(baseMaps).addTo(map);
 
                 const combinedMarkers = {}; //const for data with same lat and lng, explained further down
 
+                // Checking if there is no data, if so displays a message in the popup
+                if (data.length === 0) {
+                    const noDataMessage = "No data found at this location";
+                    // no data message added to the popup
+                    marker.bindPopup(noDataMessage).openPopup();
+                    return;
+                }
+
                 data.slice(0, 50).forEach(item => { // This makes it so there is no more than 50 crimes shown on the screen at the same time. Reducing having an overload of information that is super long
                     const lat = item.location.latitude; // Getting the lat
                     const lng = item.location.longitude; // Getting the lng
@@ -166,7 +174,7 @@ L.control.layers(baseMaps).addTo(map);
     
     const locationSearchInput = document.getElementById('locationSearching');
     const searchButton = document.getElementById('searchingButton');
-    const nominatimEndpoint = 'https://nominatim.openstreetmap.org/search'; //This is API (2/2), this API helps me geolocate the town or city the user inputs in the search box
+    const nominatimEndpoint = 'https://nominatim.openstreetmap.org/search'; //This is API (2/2), this nominatim API helps me geolocate the town or city the user inputs in the search box
     
     // Function to handle the search
     function performSearch() {
