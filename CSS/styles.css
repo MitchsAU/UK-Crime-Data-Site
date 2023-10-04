@@ -3,19 +3,9 @@ margin: 0;
 padding: 0;
 }
 
+/* Setting the background to the dark map */
 body{
   background-image: url(../Images/2.PNG);
-}
-
-#contentbox{
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-width: 100%; 
-}
-
-#content{
-text-align: left;
-width: 20em;
 }
 
 /* Position the container */
@@ -35,11 +25,14 @@ main {
     text-align: center;
 }
 
+/* Styling the main header */
 .header {
     margin-bottom: 5vh;
     color: #c1c1c1;
     font-family: 'Roboto';
 }
+
+/* Styling subtitle */
 .subtitle {
     margin-bottom: 2.5vh;
     color: #383838;
@@ -53,6 +46,8 @@ main {
     text-transform: uppercase;
     font-size: 24px;
 }
+
+/* Styling the dividing line under the subtitle of page */
 hr.solid {
   background-color: #c1c1c1; 
   height: 1px; 
@@ -78,7 +73,7 @@ a{
     text-decoration: none;
 }
 
-/* Buttons and inputs */
+/* This is the keyframes for the bouce effect on the fullscreen and heatmap/pin locatin map buttons */
 
 @keyframes bounce {
     0% {
@@ -98,6 +93,8 @@ a{
       transform: translateX(0) scale(1);
     }
   }
+
+  /* Section for styling all the buttons on the site */
   .blinking-button {
     display: inline-flex;
     align-items: center;
@@ -114,31 +111,36 @@ a{
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   .blinking-button {
     background: transparent;
     border: none;
     cursor: pointer;
   }
+  
   .blinking-button.solid {
     background-color: #c1c1c1;
     color: #383838;
   }
+
   .blinking-button.solid:hover,
   .blinking-button.solid:focus {
     background-color: #383838;
     color: #c1c1c1;
   }
+
   .blinking-button.icon .icon {
     color: #f15152;
     font-size: 1rem;
     margin-left: 0.3125rem;
   }
+
   .blinking-button.icon:hover .icon,
   .blinking-button.icon:focus .icon {
     animation: bounce 1s infinite linear;
   }
 
-/* Searhing town or city styling button */
+/* section for searhing town or city styling button */
 
   .blinking-button.outline {
     color: #c1c1c1;
@@ -147,13 +149,16 @@ a{
     width: 150px;
     outline: none;
   }
+
   .blinking-button.outline:not(.hover):hover,
   .blinking-button.outline:not(.hover):focus {
     color: #c1c1c1;
   }
+
   .blinking-button.outline:hover::placeholder{
     color: #383838;
   }
+
   .blinking-button.outline:hover,
   .blinking-button.outline:focus,
   .blinking-button.outline:focus::placeholder {
@@ -161,6 +166,7 @@ a{
     color: #383838;
   }
 
+  /* Making grid display so the search button is next to the input box */
   .searchStyle {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -168,6 +174,7 @@ a{
     margin: 0 auto;
   }
 
+  /* Setting width for buttons and inputs */
   #dateSelect,
   #crimeSelect,
   #fullScreen{
@@ -193,10 +200,11 @@ a{
     text-align: start;
     display: grid;
     grid-template-columns: 1fr;
-    border: 1px solid transparent; /* Initially set border colour to transparent */
+    border: 1px solid transparent; /* Initially set border colour to transparent, this gets changed in the JS depending on the inforamtion */
     padding: 5px;
   }
-  
+
+  /* This is setting alternating colours for better readability, every odd and even it alternates colours */
   #crimeCounts tr:nth-child(even) {
     color: #c1c1c1;
   }
@@ -218,6 +226,108 @@ a{
     background-color: #fff; /*Colour of tip*/
   }
 
+  /* This section is styling the table in the marker popup */
+  .tableHeader{
+    display: block;
+    text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 1000;
+    font-family: 'Cairo';
+  }
+
+  .table{
+    display: table;
+    border-collapse: collapse;
+    margin: 0 auto; /* Center the table horizontally */
+    border: 1px solid black; /* Border around the whole table */ 
+    text-align: center;
+    justify-content: center;
+    font-family: 'Cairo';
+  }
+
+  .popupDiv{
+    display: table-row;
+    font-weight: bold;
+    background-color: rgba(171, 218, 233, 0.5);
+  }
+
+  .popupDiv span{
+    display: table-cell;
+    text-align: center;
+    border: 1px solid black; /* Borders around individual cells */
+    padding: 5px;
+  }
+
+  .popupContentDiv:nth-child(odd){
+    display: table-row;
+    text-align: center;
+    background-color: rgba(171, 218, 233, 0.5);
+  }
+  .popupContentDiv:nth-child(even){
+    display: table-row;
+    text-align: center; 
+  }
+
+  .popupContentDiv span span {
+    display: inline;
+    padding: 0;
+    border: none;
+  }
+
+  .popupContentDiv span{
+    display: table-cell;
+    text-align: center;
+    border: 1px solid black; /* Borders around individual cells */
+    padding: 5px
+  }
+
+  /* Styling the colour reference */
+  h3{
+   color: #c1c1c1;
+   font-family: 'Cairo';
+   font-size: 16px;
+   text-transform: uppercase;
+   letter-spacing: 0.125em;
+  }
+
+  .reference{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    color: #c1c1c1;
+    font-family: 'Cairo';
+  }
+
+  /* Setting the colors of the dots */
+  .colorGreen{
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background-color: green;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  .colorYellow{
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background-color: #ffbf00;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  .colorRed{
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
 
   /*MEDIA QUERIES*/
 
@@ -289,63 +399,6 @@ a{
       margin-bottom: 1vh;
     }
 
-  }
-  .tableHeader{
-    display: block;
-    text-align: center;
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    padding: 5px;
-    font-size: 16px;
-    font-weight: 1000;
-    font-family: 'Cairo';
-  }
-
-  .table{
-    display: table;
-    border-collapse: collapse;
-    margin: 0 auto; /* Center the table horizontally */
-    border: 1px solid black; /* Border around the whole table */ 
-    text-align: center;
-    justify-content: center;
-    font-family: 'Cairo';
-  }
-
-  .popupDiv{
-    display: table-row;
-    font-weight: bold;
-    background-color: rgba(171, 218, 233, 0.5);
-  }
-
-  .popupDiv span{
-    display: table-cell;
-    text-align: center;
-    border: 1px solid black; /* Borders around individual cells */
-    padding: 5px;
-  }
-
-  .popupContentDiv:nth-child(odd){
-    display: table-row;
-    text-align: center;
-    background-color: rgba(171, 218, 233, 0.5);
-  }
-  .popupContentDiv:nth-child(even){
-    display: table-row;
-    text-align: center; 
-  }
-
-  .popupContentDiv span span {
-    display: inline;
-    padding: 0;
-    border: none;
-  }
-
-  .popupContentDiv span{
-    display: table-cell;
-    text-align: center;
-    border: 1px solid black; /* Borders around individual cells */
-    padding: 5px
   }
   
   

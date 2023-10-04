@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crime Data Map</title>
+    <title>Crime Data Map - Pin Location</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="stylesheet" href="./CSS/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
@@ -22,7 +22,7 @@
         <div class="subtitle">
             <h5>Pin Location on Map</h5>
         </div>
-        <hr class="solid">
+        <hr class="solid"> <!-- Line separation-->
     <div>
         <div class="searchStyle">
             <div>
@@ -69,7 +69,7 @@
             <option value="2023-04">April 2023</option>
             <option value="2023-05">May 2023</option>
             <option value="2023-06">June 2023</option>
-            <option value="2023-08">August 2023 (Coming Soon)</option>
+            <option value="2023-07">July 2023</option>
         </select>
         <div>
             <a href="heatmap.html" class="blinking-button solid light hover icon blink" id="wide">
@@ -83,9 +83,24 @@
               <span class="material-icons icon">chevron_right</span>
             </button>
         </div>
+            <h3>Colour Meaning of Crimes</h3>
+            <div class="reference">
+                <div>
+                <span class="colorGreen"></span>
+                <h5>Minor</h5>
+                </div>
+                <div>
+                <span class="colorYellow"></span>
+                <h5>Moderate</h5>
+                </div>
+                <div>
+                <span class="colorRed"></span>
+                <h5>Servere</h5>
+            </div>
+        </div>
     </div>
     </main>
-    <div id="map"></div>
+    <div id="map"></div>  <!-- The leaflet map -->
     
     </div>
 

@@ -4,7 +4,7 @@
     <base target="_top">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Leaflet Heatmap Cell</title>
+    <title>Crime Data Map - Heat Map</title>
     <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
@@ -26,7 +26,7 @@
             <div class="subtitle">
                 <h5>Heat Map</h5>
             </div>
-            <hr class="solid">
+            <hr class="solid"> <!-- Line separation -->
         <div id="selectors">
             <div class="section1">
             <div class="searchStyle">
@@ -74,7 +74,7 @@
                 <option value="2023-04">April 2023</option>
                 <option value="2023-05">May 2023</option>
                 <option value="2023-06">June 2023</option>
-                <option value="2023-08">August 2023 (Coming Soon)</option>
+                <option value="2023-07">July 2023</option>
             </select>
             <div>
                 <select id="crimeSelect" class="blinking-button outline light hover blink">
@@ -117,11 +117,9 @@
         </div>
         </div>
         </main>
-        <div id="map"></div>
+        <div id="map"></div> <!-- The leaflet map -->
         </div>
-       
-        <div id="contentbox">
-        <div id="content"></div>
+    
     </div>
 <script src="./JS/heatmap.js"></script>
 <script src="./JS/fullscreen.js"></script>

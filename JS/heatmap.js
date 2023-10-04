@@ -1,6 +1,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const map = L.map('map').setView([52.6376, -1.135171], 12); // Initial map view
 
+        //Importing a varierty of different map layers for users to choose from
         var SmoothDark = L.tileLayer('https://{s}.tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token={accessToken}', {
             attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             minZoom: 0,
@@ -12,26 +13,29 @@
         var Regular = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        }).addTo(map); //First map to be loaded 
         
         var GoogleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
             maxZoom: 20,
             subdomains: ['mt0','mt1','mt2','mt3']
         });
+
         var GoogleStreet = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
             subdomains: ['mt0','mt1','mt2','mt3']
         });
+
         var Dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 20
         });
+
         var Topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-        maxZoom: 17,
-        attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-    });
-    
+            maxZoom: 17,
+            attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        });
+        
     // Map Layer Selector
     var baseMaps = {
         "Regular": Regular,
@@ -42,6 +46,7 @@
         "SmoothDark": SmoothDark,
     
     };
+
     //Controller for changing the map varients
     L.control.layers(baseMaps).addTo(map);
     
@@ -83,33 +88,32 @@
             // Fetch and display crime data for new marker position with selected date and selected crime
             const selectedDate = dateSelect.value;
             const selectedCrime = crimeSelect.value;
-            // Construct the API URL with clicked coordinates
+            // Construct the API URL with clicked coordinates, this is the same API as the pin but a different link
             const apiUrl = `https://data.police.uk/api/crimes-street/${selectedCrime}?poly=${clickedCoordinates[0].lat},${clickedCoordinates[0].lng}:${clickedCoordinates[1].lat},${clickedCoordinates[1].lng}:${clickedCoordinates[2].lat},${clickedCoordinates[2].lng}&date=${selectedDate}`;
             // Fetch data and update heatmap
             fetch(apiUrl)
                 .then(resp => {
                     if (resp.status === 503) {
-                        // Handle 503 error
-                        alert("Area is too large, please select a smaller area.");
+                        // Handle 503 error, the 503 error is if the fetch request pulls more than 10,000 arrays
+                        alert("Area is too large, please select a smaller area."); // Sends alert to user
                         // Reset state and clear previous heatmap layer
                         clickedCoordinates = [];
                         if (currentHeatmapLayer) {
                             map.removeLayer(currentHeatmapLayer);
-                        }
+                        } // error handling 
                         throw new Error("Area is too large");
                     }
                     if (!resp.ok) {
                         throw new Error("Network response was not ok");
                     }
-                    return resp.json();
+                    return resp.json(); // return json format
                 })
                 .then(data => {
-
                     Object.keys(crimeCounts).forEach(category => {
                         crimeCounts[category] = 0;
                     });
 
-                    const heatData = data.slice(0, 9999).map(item => {
+                    const heatData = data.slice(0, 9999).map(item => { // slicing the data to try and not pull more than 9999 arrays
                         console.log(item.category);
                         crimeCounts[item.category] = (crimeCounts[item.category] || 0) + 1;
                         return {
@@ -119,8 +123,9 @@
                         };
                     });
 
-                    displayCrimeCounts(crimeCounts);
+                    displayCrimeCounts(crimeCounts); // Display counts on screen
 
+                    // setting up the config for the heatmap, this allows me to change things like opacity and radius
                     var cfg = {
                         "radius": 20,
                         "maxOpacity": 0.8,
@@ -143,12 +148,12 @@
                     // Clear the clicked coordinates for the next input
                     clickedCoordinates = [];
                 })
-                .catch(error => {
+                .catch(error => { // errors
                     console.error('Error:', error);
-                    // Handle other errors here if needed
                 }); 
         }
         });
+
         const locationSearchInput = document.getElementById('locationSearching');
         const searchButton = document.getElementById('searchingButton');
         const nominatimEndpoint = 'https://nominatim.openstreetmap.org/search';
@@ -158,7 +163,7 @@
             const locationName = locationSearchInput.value;
         
             // Perform a geocoding request through another API
-            fetch(`${nominatimEndpoint}?q=${encodeURIComponent(locationName)}&format=json`)
+            fetch(`${nominatimEndpoint}?q=${encodeURIComponent(locationName)}&format=json`) //This is API (2/2), this API helps me geolocate the town or city the user inputs in the search box
                 .then(response => response.json())
                 .then(data => {
                     if (data.length > 0) {
@@ -166,12 +171,12 @@
                         const latitude = parseFloat(data[0].lat);
                         const longitude = parseFloat(data[0].lon);
         
-                        // Center the map on the found location
+                        // Center the map on the found location with a zoom of 12
                         map.setView([latitude, longitude], 12);
                     } else {
-                        alert('Location not found.');
+                        alert('Location not found.'); //Alerts the user if the location doesnt exist
                     }
-                })
+                }) // If there is a different error it will alert the user to try again
                 .catch(error => {
                     console.error('Error fetching location data:', error);
                     alert('Error fetching location data. Please try again later.');
@@ -188,16 +193,17 @@
             }
         });
 
+        // Function to display the information on screen
         function displayCrimeCounts(counts) {
             const countsContainer = document.getElementById('crimeCounts');
             countsContainer.innerHTML = ''; // Clear previous counts
     
-            // Iterate through the crime counts and add them to the container
+            // Go through the crime counts and add them to the container
             for (const category in counts) {
                 if (counts.hasOwnProperty(category)) {
                     const count = counts[category];
-                    const countElement = document.createElement('tr');
-                    countElement.textContent = ` ${category}: ${count} `;
+                    const countElement = document.createElement('tr'); // Creating tr element
+                    countElement.textContent = ` ${category}: ${count} `; // Adding category and its count
                     countsContainer.appendChild(countElement);
                 }
             }
@@ -205,7 +211,7 @@
 
         var crimeCountsElement = document.getElementById('crimeCounts');
 
-        // Function to change the border colour
+        // Function to change the border colour, this hides the border when no information is being displayed on screen
         function setBorderColor(color) {
         crimeCountsElement.style.borderColor = color;
         }
@@ -217,7 +223,7 @@
             if (mutation.type === 'childList') {
             // If the text is added it changes to border colour to be visible
             if (crimeCountsElement.textContent.trim() !== '') {
-                setBorderColor('#c1c1c1');
+                setBorderColor('#c1c1c1'); // Sets colour
             } else {
                 // Setting it back to transprent if the text is removed
                 setBorderColor('transparent');
