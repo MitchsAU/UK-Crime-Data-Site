@@ -248,5 +248,4 @@
         observer.observe(crimeCountsElement, config);
 
     });
-
     
