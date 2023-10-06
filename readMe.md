@@ -25,7 +25,7 @@ wouldn’t work in an external file being referenced in another with a script ta
 
 ![codesnippet](./Images/date%20selector%20fail.PNG)
 
-Although this result would only show from January 2023 to December 2021 and I couldn’t figure out how to make it display the past 3 years offsetting it by 2 months.
+Although this result would only show from January 2023 to December 2021 and I couldn’t figure out how to make it display the past 3 years offsetting it by 2 months. If I could’ve improved further on this web app I would have added a feature where a chart is generated on the data provided as a modal popup for the user to click on as well as better optimising the code.
 
 
 # References
